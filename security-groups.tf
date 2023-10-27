@@ -80,6 +80,12 @@ resource "aws_security_group" "elb_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Allow incoming traffic from anywhere (you can restrict this as needed)
   }
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["0.0.0.0/0"] # Allow incoming traffic from anywhere (you can restrict this as needed)
+  }
   egress {
     from_port   = 0
     to_port     = 0
