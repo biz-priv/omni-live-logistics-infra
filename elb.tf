@@ -4,6 +4,7 @@ resource "aws_lb" "flask_lb" {
   load_balancer_type = "application" # You can choose "application" or "network" depending on your use case
   security_groups = [aws_security_group.elb_sg.id]
   subnets            = [aws_subnet.public_subnet.id,aws_subnet.private_subnet.id] # Subnets for the ELB
+  enable_cross_zone_load_balancing = true
 }
 
 resource "aws_lb_target_group" "flask_target_group" {

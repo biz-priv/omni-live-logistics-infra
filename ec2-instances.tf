@@ -15,10 +15,12 @@ resource "aws_instance" "private_instance" {
   subnet_id     = aws_subnet.private_subnet.id
   key_name      = "flask-private" # Replace with your key pair name
   vpc_security_group_ids = [aws_security_group.private_sg.id]
+  iam_instance_profile = aws_iam_role.LVLP-infra.name
   tags = {
     Name = "private_instance"
   }
 }
+
 
 output "public_instance_id" {
   value = aws_instance.public_instance.id

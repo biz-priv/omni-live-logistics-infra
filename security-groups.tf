@@ -52,6 +52,12 @@ resource "aws_security_group" "private_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Replace with your allowed IP range(s)
   }
+  ingress {
+    from_port   = 443
+    to_port     = 443
+    protocol    = "tcp"
+    cidr_blocks = ["10.0.0.0/16"] # Replace with your allowed IP range(s)
+  }
 
   # Define outbound rules (allow all outbound traffic)
   egress {

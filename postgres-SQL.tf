@@ -6,6 +6,7 @@ resource "aws_db_instance" "flask_db" {
   engine_version       = "14.6"
   instance_class       = var.db_instance_type
   identifier           = var.db_identifier
+  db_name              = "flaskdb"
   username             = var.db_username
   password             = var.db_password
   parameter_group_name = "default.postgres14"
