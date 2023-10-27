@@ -18,7 +18,7 @@ resource "aws_api_gateway_integration" "sightline-integration" {
   http_method = "GET"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = var.nlb_arn
+  uri        = var.nlb_endpoint
   #connection_type = "VPC_LINK"
 }
 

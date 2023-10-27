@@ -55,3 +55,6 @@ variable "public_cidr"{
 variable "private_cidr"{
   default="10.0.2.0/24"
 }
+variable "nlb_endpoint"{
+  description = "nlb-endpoint"
+}
