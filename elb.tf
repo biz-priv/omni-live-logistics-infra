@@ -3,7 +3,7 @@ resource "aws_lb" "flask_lb" {
   internal           = false # Set to true if you want an internal (private) ELB
   load_balancer_type = "network" # You can choose "application" or "network" depending on your use case
   security_groups = [aws_security_group.elb_sg.id]
-  subnets            = [aws_subnet.public_subnet.id,aws_subnet.private_subnet.id] # Subnets for the ELB
+  subnets            = [aws_subnet.public_subnet.id,aws_subnet.public_subnet_2.id] # Subnets for the ELB
   enable_cross_zone_load_balancing = true
 }
 

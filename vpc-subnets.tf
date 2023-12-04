@@ -16,7 +16,15 @@ resource "aws_subnet" "public_subnet" {
     Name = "public_subnet" # Set the subnet name as "public_subnet"
   }
 }
-
+resource "aws_subnet" "public_subnet_2" {
+  vpc_id     = aws_vpc.flask_vpc.id
+  cidr_block = var.public_cidr_2 # Specify the public subnet CIDR block
+  availability_zone = var.az1 # Specify the desired availability zone
+  map_public_ip_on_launch = true # Make the subnet public
+  tags = {
+    Name = "public_subnet" # Set the subnet name as "public_subnet"
+  }
+}
 resource "aws_subnet" "private_subnet" {
   vpc_id     = aws_vpc.flask_vpc.id
   cidr_block = var.private_cidr # Specify the private subnet CIDR block
