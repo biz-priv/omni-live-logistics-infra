@@ -3,7 +3,7 @@
 # Create an S3 bucket with a private ACL
 resource "aws_s3_bucket" "sightline-heroku" {
   bucket = var.bucket_name
-  acl    = "private"
+  # acl    = "private"
 }
 
 # Create an S3 VPC endpoint

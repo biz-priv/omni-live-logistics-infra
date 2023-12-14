@@ -1,8 +1,13 @@
+resource "aws_iam_instance_profile" "sightline-iam-role" {
+  name = "sightline-iam-role"
+  role= aws_iam_role.sightline-iam-role.name
+}
+
 resource "aws_instance" "public_instance" {
   ami           = var.public_ami # Specify your desired AMI ID
   instance_type = var.ec2_instance_type
   subnet_id     = aws_subnet.public_subnet.id
-  key_name      = "public-key" # Replace with your key pair name
+  key_name      = "sightline-public" # Replace with your key pair name
   vpc_security_group_ids = [aws_security_group.public_sg.id]
   tags = {
     Name = "public_instance"
@@ -15,7 +20,7 @@ resource "aws_instance" "private_instance" {
   subnet_id     = aws_subnet.private_subnet.id
   key_name      = "sightline-private" # Replace with your key pair name
   vpc_security_group_ids = [aws_security_group.private_sg.id]
-  iam_instance_profile = aws_iam_role.sightline-iam-role.name
+  iam_instance_profile = aws_iam_instance_profile.sightline-iam-role.name
   tags = {
     Name = "private_instance"
   }

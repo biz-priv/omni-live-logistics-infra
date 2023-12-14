@@ -19,6 +19,11 @@ variable "vpc_cidr" {
 variable "ec2_instance_type" {
   type     = string
 }
+variable "profile" {
+  description = "The name of the AWS CLI profile"
+  type        = string
+  default     = "default"  # Default profile if not provided
+}
 
 variable "db_instance_type" {
   type     = string

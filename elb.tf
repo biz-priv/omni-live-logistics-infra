@@ -16,7 +16,13 @@ resource "aws_lb_target_group" "sightline_target_group" {
 
 resource "aws_lb_target_group_attachment" "sightline_target_group_attachment" {
   target_group_arn = aws_lb_target_group.sightline_target_group.arn
-  target_id        = aws_instance.private_instance.id
+  target_id       = aws_instance.private_instance.id
+  port = 80
+}
+
+resource "aws_lb_target_group_attachment" "sightline_target_group_attachment_2" {
+  target_group_arn = aws_lb_target_group.sightline_target_group.arn
+  target_id       = aws_instance.private_instance_2.id
   port = 80
 }
 
