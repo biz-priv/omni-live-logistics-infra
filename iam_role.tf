@@ -1,5 +1,5 @@
-resource "aws_iam_role" "LVLP-infra" {
-  name = "LVLP-infra" # Name for the IAM role
+resource "aws_iam_role" "sightline-iam-role" {
+  name = "sightline-iam-role" # Name for the IAM role
 
   assume_role_policy = jsonencode({
     Version = "2012-10-17",
@@ -13,6 +13,11 @@ resource "aws_iam_role" "LVLP-infra" {
       }
     ]
   })
+}
+
+resource "aws_iam_role_policy_attachment" "cloudwatch_logs_policy" {
+  policy_arn = "arn:aws:iam::aws:policy/CloudWatchLogsFullAccess"  # Adjust the policy as needed
+  role       = aws_iam_role.sightline-iam-role.name
 }
 
 resource "aws_iam_policy" "s3_policy" {
@@ -35,7 +40,7 @@ resource "aws_iam_policy" "s3_policy" {
 }
 
 resource "aws_iam_policy_attachment" "s3_attachment" {
-  name       = "flask-s3-attachment"
+  name       = "sightline-s3-attachment"
   policy_arn = aws_iam_policy.s3_policy.arn
-  roles      = [aws_iam_role.LVLP-infra.name]
+  roles      = [aws_iam_role.sightline-iam-role.name]
 }

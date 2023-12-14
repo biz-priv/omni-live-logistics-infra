@@ -1,7 +1,7 @@
 # Create an API Gateway Rest API
 resource "aws_api_gateway_rest_api" "sightline-api" {
   name        = "sightline-api"
-  description = "API for flask app"
+  description = "API for sightline app"
 }
 
 # Create a resource
@@ -18,7 +18,7 @@ resource "aws_api_gateway_integration" "sightline-integration" {
   http_method = "GET"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}"
 }
 
 # Create a method for the resource
@@ -55,7 +55,7 @@ resource "aws_api_gateway_integration" "formstack_webhook-integration" {
   http_method = "POST"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}/formstack_webhook"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}/formstack_webhook"
 }
 
 # Formstack Webhook Flatbed route
@@ -78,7 +78,7 @@ resource "aws_api_gateway_integration" "formstack_webhook_flatbed" {
   http_method = "POST"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}/formstack_webhook/flatbed"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}/formstack_webhook/flatbed"
 }
 
 # Formstack Webhook Flatbed-test route
@@ -101,7 +101,7 @@ resource "aws_api_gateway_integration" "webhook_flatbed_test" {
   http_method = "POST"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}/formstack_webhook/flatbed-test"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}/formstack_webhook/flatbed-test"
 }
 
 # Text Locate Pings route
@@ -124,7 +124,7 @@ resource "aws_api_gateway_integration" "text_locate_pings_integration" {
   http_method = "POST"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}/text_locate_pings"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}/text_locate_pings"
 }
 
 # Text Locate Webhook route
@@ -147,7 +147,7 @@ resource "aws_api_gateway_integration" "text_locate_webhook_integration" {
   http_method = "POST"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}/text_locate_webhook"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}/text_locate_webhook"
 }
 
 # Create the main resource "api"
@@ -177,7 +177,7 @@ resource "aws_api_gateway_integration" "api_quote_request" {
   http_method = "POST"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}/api/quote_request"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}/api/quote_request"
 }
 
 # Create a sub-resource "overhaul" under "api"
@@ -207,5 +207,5 @@ resource "aws_api_gateway_integration" "overhaul_locations" {
   http_method = "POST"
   type        = "HTTP_PROXY"
   integration_http_method = "ANY"
-  uri        = "http://${aws_lb.flask_lb.dns_name}/api/overhaul/locations"
+  uri        = "http://${aws_lb.sightline_lb.dns_name}/api/overhaul/locations"
 }

@@ -1,14 +1,14 @@
 # s3 bucket
 
 # Create an S3 bucket with a private ACL
-resource "aws_s3_bucket" "flask-heroku" {
+resource "aws_s3_bucket" "sightline-heroku" {
   bucket = var.bucket_name
   acl    = "private"
 }
 
 # Create an S3 VPC endpoint
 resource "aws_vpc_endpoint" "s3" {
-  vpc_id       = aws_vpc.flask_vpc.id
+  vpc_id       = aws_vpc.sightline_vpc.id
   service_name = "com.amazonaws.${var.region}.s3"
 }
 

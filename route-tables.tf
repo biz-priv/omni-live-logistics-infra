@@ -1,10 +1,10 @@
 # Create a custom route table for the public subnet
 resource "aws_route_table" "public_route_table" {
-  vpc_id = aws_vpc.flask_vpc.id
+  vpc_id = aws_vpc.sightline_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    gateway_id = aws_internet_gateway.flask_igw.id
+    gateway_id = aws_internet_gateway.sightline_igw.id
   }
 
   tags = {
@@ -14,11 +14,11 @@ resource "aws_route_table" "public_route_table" {
 
 # Modify the route table of the private subnet to route internet-bound traffic through the NAT gateway
 resource "aws_route_table" "private_route_table" {
-  vpc_id = aws_vpc.flask_vpc.id
+  vpc_id = aws_vpc.sightline_vpc.id
 
   route {
     cidr_block = "0.0.0.0/0"
-    nat_gateway_id = aws_nat_gateway.flask_nat_gateway.id
+    nat_gateway_id = aws_nat_gateway.sightline_nat_gateway.id
   }
 
   tags = {

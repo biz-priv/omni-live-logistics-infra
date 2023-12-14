@@ -1,6 +1,6 @@
 resource "aws_security_group" "public_sg" {
   name        = "public-sg"
-  vpc_id = aws_vpc.flask_vpc.id
+  vpc_id = aws_vpc.sightline_vpc.id
   description = "Security group for public instances"
 
   # Define inbound rules (allow SSH and HTTP traffic)
@@ -17,13 +17,6 @@ resource "aws_security_group" "public_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"]
   }
-  ingress {
-    from_port   = 5000
-    to_port     = 5000
-    protocol    = "tcp"
-    cidr_blocks = ["0.0.0.0/0"]  # Adjust this to restrict traffic as needed
-  }
-
   # Define outbound rules (allow all outbound traffic)
   egress {
     from_port   = 0
@@ -35,7 +28,7 @@ resource "aws_security_group" "public_sg" {
 
 resource "aws_security_group" "private_sg" {
   name        = "private-sg"
-  vpc_id = aws_vpc.flask_vpc.id
+  vpc_id = aws_vpc.sightline_vpc.id
   description = "Security group for private instances"
 
   # Define inbound rules as needed for private instance access
@@ -52,12 +45,6 @@ resource "aws_security_group" "private_sg" {
     protocol    = "tcp"
     cidr_blocks = ["0.0.0.0/0"] # Replace with your allowed IP range(s)
   }
-  ingress {
-    from_port   = 443
-    to_port     = 443
-    protocol    = "tcp"
-    cidr_blocks = ["10.0.0.0/16"] # Replace with your allowed IP range(s)
-  }
 
   # Define outbound rules (allow all outbound traffic)
   egress {
@@ -72,7 +59,7 @@ resource "aws_security_group" "private_sg" {
 resource "aws_security_group" "elb_sg" {
   name        = "elb-sg"
   description = "Security group for ELB"
-  vpc_id      = aws_vpc.flask_vpc.id
+  vpc_id      = aws_vpc.sightline_vpc.id
 
   ingress {
     from_port   = 80
@@ -97,7 +84,7 @@ resource "aws_security_group" "elb_sg" {
 # postgres sql db 
 resource "aws_security_group" "db_sg" {
   name        = "db-sg"
-  vpc_id = aws_vpc.flask_vpc.id
+  vpc_id = aws_vpc.sightline_vpc.id
   description = "Security group for RDS PostgreSQL"
 
   # Define inbound rules as needed for PostgreSQL access
