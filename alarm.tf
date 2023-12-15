@@ -17,3 +17,4 @@ resource "aws_cloudwatch_metric_alarm" "sightline-alarm" {
     aws_sns_topic.sightline_alarm_topic.arn,
   ]
 }
+
